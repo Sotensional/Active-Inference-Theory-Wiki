@@ -2,7 +2,7 @@ I started the composition of the Theory-Network from [[Systems exists]]. While t
 ***
 ![[Millidge,Seth,Buckley2021Derivations.PNG]]
 ***
-	The discussion seemed to be the perfect starting point for the composing of the theory-wiki. And: the mathematical walktrough needs far less mathematical and physical background knowledge then the monograph of Friston. Bonus: In their appendix they list assumptions needed for the formulations. These build up the first cluster of sentences. For the Langavian equation the most assumptions are about the noise $\omega$ and its covariance $\Gamma$. They assume rather uniform noise centered around the mean (Gaussian). They also assume a dynamical stability: The non-equilibrium-steady state, usually shortened to NESS. 
+The discussion seemed to be the perfect starting point for the composing of the theory-wiki. And: the mathematical walktrough needs far less mathematical and physical background knowledge then the monograph of Friston. Bonus: In their appendix they list assumptions needed for the formulations. These build up the first cluster of sentences. For the Langavian equation the most assumptions are about the noise $\omega$ and its covariance $\Gamma$. They assume rather uniform noise centered around the mean (Gaussian). They also assume a dynamical stability: The non-equilibrium-steady state, usually shortened to NESS. 
 ***
 ![[Systemsexists_Assumptions.PNG]]
 ***

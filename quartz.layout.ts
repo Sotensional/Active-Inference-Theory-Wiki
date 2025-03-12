@@ -43,12 +43,11 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Darkmode(),
     Component.Explorer({
       folderDefaultState: "collapsed",
+      filterFn: (node) => node.data?.title != "./content/Figures",
     }),
   ],
   right: [
     Component.Graph(),
-    Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
   ],
 }
 

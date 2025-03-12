@@ -109,6 +109,24 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       }
     }
 
+// Define the filter function type for graph nodes
+interface GraphNode {
+  id: string
+  path?: string
+  // Add other properties your graph nodes might have
+}
+
+// Function to filter nodes by path
+const filterNodesByPath = (nodes: GraphNode[], pathPrefix: string): GraphNode[] => {
+  if (!pathPrefix) return nodes // If no path provided, return all nodes
+  return nodes.filter(node => node.path && node.path.startsWith(pathPrefix))
+}
+
+
+// Export the filter function
+export { filterNodesByPath }
+
+
     if (showTags) {
       const localTags = details.tags
         .filter((tag) => !removeTags.includes(tag))
@@ -121,6 +139,8 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       }
     }
   }
+
+
 
   const neighbourhood = new Set<SimpleSlug>()
   const wl: (SimpleSlug | "__SENTINEL")[] = [slug, "__SENTINEL"]
