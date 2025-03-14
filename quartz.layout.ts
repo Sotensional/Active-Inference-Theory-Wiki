@@ -42,9 +42,8 @@ export const defaultContentPageLayout: PageLayout = {
     Component.Search(),
     Component.Darkmode(),
     Component.Explorer({
-      folderDefaultState: "collapsed",
-      filterFn: (node) => node.data?.title != "./content/Figures",
-    }),
+      filterFn: (node) => node.data?.title != "Figures",
+}),
   ],
   right: [
     Component.Graph(),

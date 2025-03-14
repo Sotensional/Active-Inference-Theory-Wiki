@@ -68,6 +68,27 @@ type TweenNode = {
   stop: () => void
 }
 
+// Add this function to check if a node matches the path filter
+function matchesPathFilter(nodeId: SimpleSlug, pathFilter: string): boolean {
+  if (!pathFilter) return true; // if no filter, include all nodes
+  if (nodeId.startsWith('tags/')) return true; // always include tag nodes
+  // Convert both paths to lowercase for case-insensitive comparison
+  const normalizedPath = nodeId.toLowerCase();
+  const normalizedFilter = pathFilter.toLowerCase();
+  return normalizedPath.startsWith(normalizedFilter);
+}
+
+// Add a function to get color based on tag
+const getTagColor = (tags: string[]) => {
+  if (tags.includes("Derivation")) return "#ff6b6b"  // red
+  if (tags.includes("Hinge")) return "#4ecdc4"       // teal
+  if (tags.includes("Observational")) return "#45b7d1" // blue
+  if (tags.includes("Regulars")) return "#96ceb4"    // green
+  if (tags.includes("Assumptions")) return "#ffeead" // yellow
+  if (tags.includes("Relational")) return "#d4a5a5"  // pink
+  return computedStyleMap["--gray"]  // default color for nodes without these tags
+}
+
 async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   const slug = simplifySlug(fullSlug)
   const visited = getVisited()
@@ -87,6 +108,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
     showTags,
     focusOnHover,
     enableRadial,
+    pathFilter,
   } = JSON.parse(graph.dataset["cfg"]!) as D3Config
 
   const data: Map<SimpleSlug, ContentDetails> = new Map(
@@ -109,24 +131,6 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       }
     }
 
-// Define the filter function type for graph nodes
-interface GraphNode {
-  id: string
-  path?: string
-  // Add other properties your graph nodes might have
-}
-
-// Function to filter nodes by path
-const filterNodesByPath = (nodes: GraphNode[], pathPrefix: string): GraphNode[] => {
-  if (!pathPrefix) return nodes // If no path provided, return all nodes
-  return nodes.filter(node => node.path && node.path.startsWith(pathPrefix))
-}
-
-
-// Export the filter function
-export { filterNodesByPath }
-
-
     if (showTags) {
       const localTags = details.tags
         .filter((tag) => !removeTags.includes(tag))
@@ -140,41 +144,53 @@ export { filterNodesByPath }
     }
   }
 
-
-
   const neighbourhood = new Set<SimpleSlug>()
   const wl: (SimpleSlug | "__SENTINEL")[] = [slug, "__SENTINEL"]
   if (depth >= 0) {
     while (depth >= 0 && wl.length > 0) {
-      // compute neighbours
       const cur = wl.shift()!
       if (cur === "__SENTINEL") {
         depth--
         wl.push("__SENTINEL")
       } else {
-        neighbourhood.add(cur)
-        const outgoing = links.filter((l) => l.source === cur)
-        const incoming = links.filter((l) => l.target === cur)
-        wl.push(...outgoing.map((l) => l.target), ...incoming.map((l) => l.source))
+        // Add path filter check
+        if (matchesPathFilter(cur, pathFilter)) {
+          neighbourhood.add(cur)
+          const outgoing = links.filter((l) => l.source === cur)
+          const incoming = links.filter((l) => l.target === cur)
+          wl.push(...outgoing.map((l) => l.target), ...incoming.map((l) => l.source))
+        }
       }
     }
   } else {
-    validLinks.forEach((id) => neighbourhood.add(id))
+    // For unlimited depth, still apply path filter
+    validLinks.forEach((id) => {
+      if (matchesPathFilter(id, pathFilter)) {
+        neighbourhood.add(id)
+      }
+    })
     if (showTags) tags.forEach((tag) => neighbourhood.add(tag))
   }
 
-  const nodes = [...neighbourhood].map((url) => {
-    const text = url.startsWith("tags/") ? "#" + url.substring(5) : (data.get(url)?.title ?? url)
-    return {
-      id: url,
-      text,
-      tags: data.get(url)?.tags ?? [],
-    }
-  })
+  const nodes = [...neighbourhood]
+    .filter(url => matchesPathFilter(url, pathFilter)) // Filter nodes by path
+    .map((url) => {
+      const text = url.startsWith("tags/") ? "#" + url.substring(5) : (data.get(url)?.title ?? url)
+      return {
+        id: url,
+        text,
+        tags: data.get(url)?.tags ?? [],
+      }
+    })
+
   const graphData: { nodes: NodeData[]; links: LinkData[] } = {
     nodes,
     links: links
-      .filter((l) => neighbourhood.has(l.source) && neighbourhood.has(l.target))
+      .filter((l) => {
+        const sourceNode = nodes.find((n) => n.id === l.source);
+        const targetNode = nodes.find((n) => n.id === l.target);
+        return sourceNode && targetNode;
+      })
       .map((l) => ({
         source: nodes.find((n) => n.id === l.source)!,
         target: nodes.find((n) => n.id === l.target)!,
@@ -182,7 +198,7 @@ export { filterNodesByPath }
   }
 
   const width = graph.offsetWidth
-  const height = Math.max(graph.offsetHeight, 250)
+  const height = Math.max(graph.offsetHeight, 800)
 
   // we virtualize the simulation and use pixi to actually render it
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
@@ -213,16 +229,25 @@ export { filterNodesByPath }
     {} as Record<(typeof cssVars)[number], string>,
   )
 
-  // calculate color
+  // Modify the existing color function
   const color = (d: NodeData) => {
-    const isCurrent = d.id === slug
-    if (isCurrent) {
-      return computedStyleMap["--secondary"]
-    } else if (visited.has(d.id) || d.id.startsWith("tags/")) {
+    // Keep tag nodes with their original color
+    if (d.id.startsWith("tags/")) {
       return computedStyleMap["--tertiary"]
-    } else {
-      return computedStyleMap["--gray"]
     }
+    
+    // Color nodes based on their tags
+    if (d.tags && d.tags.length > 0) {
+      if (d.tags.includes("Derivation")) return "#CC6677"    // rosyred
+      if (d.tags.includes("Hinge")) return "#DDCC77"         // sandy brown
+      if (d.tags.includes("Observational")) return "#88CCEE" // skyblue
+      if (d.tags.includes("Regulars")) return "#44AA99"      // teal
+      if (d.tags.includes("Assumption")) return "#332288"   // purple
+      if (d.tags.includes("Relational")) return "#882255"    // magenta
+    }
+    
+    // Default grey for nodes without specified tags
+    return computedStyleMap["--gray"]
   }
 
   function nodeRadius(d: NodeData) {
@@ -528,7 +553,7 @@ export { filterNodesByPath }
 
           // zoom adjusts opacity of labels too
           const scale = transform.k * opacityScale
-          let scaleOpacity = Math.max((scale - 1) / 3.75, 0)
+          let scaleOpacity = Math.max((scale - 1) / 2, 0)
           const activeNodes = nodeRenderData.filter((n) => n.active).flatMap((n) => n.label)
 
           for (const label of labelsContainer.children) {

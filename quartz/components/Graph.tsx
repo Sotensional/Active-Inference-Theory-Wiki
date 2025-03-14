@@ -19,6 +19,7 @@ export interface D3Config {
   showTags: boolean
   focusOnHover?: boolean
   enableRadial?: boolean
+  pathFilter?: string
 }
 
 interface GraphOptions {
@@ -31,16 +32,17 @@ const defaultOptions: GraphOptions = {
     drag: true,
     zoom: true,
     depth: 2,
-    scale: 2,
-    repelForce: 0.5,
+    scale: 1,
+    repelForce: 0.7,
     centerForce: 0.3,
-    linkDistance: 30,
-    fontSize: 1,
+    linkDistance: 50,
+    fontSize: 0.6,
     opacityScale: 1,
     showTags: false,
     removeTags: [],
     focusOnHover: false,
     enableRadial: false,
+    pathFilter: "Sentences",
   },
   globalGraph: {
     drag: true,
@@ -56,6 +58,7 @@ const defaultOptions: GraphOptions = {
     removeTags: [],
     focusOnHover: true,
     enableRadial: true,
+    pathFilter: "Sentences",
   },
 }
 
