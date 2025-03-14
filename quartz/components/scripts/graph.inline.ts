@@ -198,7 +198,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
   }
 
   const width = graph.offsetWidth
-  const height = Math.max(graph.offsetHeight, 800)
+  const height = Math.max(graph.offsetHeight, 650)
 
   // we virtualize the simulation and use pixi to actually render it
   const simulation: Simulation<NodeData, LinkData> = forceSimulation<NodeData>(graphData.nodes)
