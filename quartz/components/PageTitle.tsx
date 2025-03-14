@@ -37,7 +37,7 @@ PageTitle.css = `
 /* Add media query for mobile devices */
 @media (max-width: 800px) {
   .site-logo {
-    max-width: 300px;  /* Limit width on mobile */
+    max-width: 250px;  /* Limit width on mobile */
   }
 }
 `

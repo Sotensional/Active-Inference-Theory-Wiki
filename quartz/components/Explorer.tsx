@@ -8,6 +8,7 @@ import { i18n } from "../i18n"
 import { FileTrieNode } from "../util/fileTrie"
 import OverflowListFactory from "./OverflowList"
 import { concatenateResources } from "../util/resources"
+import { useState, useEffect } from "preact/hooks"
 
 type OrderEntries = "sort" | "filter" | "map"
 
@@ -59,10 +60,27 @@ export default ((userOpts?: Partial<Options>) => {
   const opts: Options = { ...defaultOptions, ...userOpts }
   const { OverflowList, overflowListAfterDOMLoaded } = OverflowListFactory()
 
-  const Explorer: QuartzComponent = ({ cfg, displayClass }: QuartzComponentProps) => {
+  const Explorer: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
+    const [collapsed, setCollapsed] = useState<Set<string>>(new Set())
+    const [explorerOpen, setExplorerOpen] = useState(false)
+
+    // Add effect to handle mobile menu button clicks
+    useEffect(() => {
+      const handleMobileNavClick = () => {
+        setExplorerOpen(!explorerOpen)
+      }
+
+      const mobileNavButton = document.querySelector('.mobile-nav')
+      mobileNavButton?.addEventListener('click', handleMobileNavClick)
+
+      return () => {
+        mobileNavButton?.removeEventListener('click', handleMobileNavClick)
+      }
+    }, [explorerOpen])
+
     return (
       <div
-        class={classNames(displayClass, "explorer")}
+        class={classNames("explorer", explorerOpen ? "active" : "")}
         data-behavior={opts.folderClickBehavior}
         data-collapsed={opts.folderDefaultState}
         data-savestate={opts.useSavedState}
@@ -72,6 +90,7 @@ export default ((userOpts?: Partial<Options>) => {
           filterFn: opts.filterFn.toString(),
           mapFn: opts.mapFn.toString(),
         })}
+        id="mobile-nav"
       >
         <button
           type="button"
@@ -100,7 +119,7 @@ export default ((userOpts?: Partial<Options>) => {
           data-mobile={false}
           aria-expanded={true}
         >
-          <h2>{opts.title ?? i18n(cfg.locale).components.explorer.title}</h2>
+          <h2>{opts.title ?? i18n(fileData.locale).components.explorer.title}</h2>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
