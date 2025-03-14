@@ -17,10 +17,7 @@ const PageTitle: QuartzComponent = ({ fileData, cfg, displayClass }: QuartzCompo
 }
 
 /* Add media query for mobile devices */
-@media all and ($mobile) {
-  .site-logo {
-    max-width: 300px;  /* Limit width on mobile */
-  }
+
 
 PageTitle.css = `
 .page-title {
@@ -38,6 +35,11 @@ PageTitle.css = `
 .site-logo {
   max-width: 100%;
   height: auto;
+}
+  @media all and ($mobile) {
+.site-logo {
+    max-width: 300px;  /* Limit width on mobile */
+  }  
 }
 `
 
