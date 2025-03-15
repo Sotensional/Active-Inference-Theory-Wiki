@@ -41,9 +41,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.MobileOnly(Component.Spacer()),
     Component.Search(),
     Component.Darkmode(),
-    Component.Explorer({
-      filterFn: (node) => node.data?.title != "Figures",
-}),
+    Component.Explorer(),
   ],
   right: [
     Component.Graph(),
