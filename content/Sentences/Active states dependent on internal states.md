@@ -21,5 +21,3 @@ $$ \not= s|e $$
 ##### Metadata
 ***
 #Sentence
-
-#TaS

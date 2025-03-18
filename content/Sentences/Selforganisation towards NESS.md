@@ -30,5 +30,3 @@ $$
 ##### Metadata
 ***
 #Sentence
-
-#TaS

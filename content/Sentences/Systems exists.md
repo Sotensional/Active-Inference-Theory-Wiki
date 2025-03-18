@@ -30,6 +30,4 @@ Basis for [[Ao Decomposition]]
 ***
 #Sentence
 
-#TaS
-
 #Hinge

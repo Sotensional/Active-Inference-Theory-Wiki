@@ -22,6 +22,4 @@ Derivation  from [[Systems exists]]
 ***
 #Sentence
 
-#TaS
-
 #Derivation

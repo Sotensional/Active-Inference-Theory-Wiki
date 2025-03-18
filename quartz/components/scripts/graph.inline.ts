@@ -241,7 +241,7 @@ async function renderGraph(graph: HTMLElement, fullSlug: FullSlug) {
       if (d.tags.includes("Derivation")) return "#CC6677"    // rosyred
       if (d.tags.includes("Hinge")) return "#DDCC77"         // sandy brown
       if (d.tags.includes("Observational")) return "#88CCEE" // skyblue
-      if (d.tags.includes("Regulars")) return "#44AA99"      // teal
+      if (d.tags.includes("Regular")) return "#44AA99"      // teal
       if (d.tags.includes("Assumption")) return "#332288"   // purple
       if (d.tags.includes("Relational")) return "#882255"    // magenta
     }

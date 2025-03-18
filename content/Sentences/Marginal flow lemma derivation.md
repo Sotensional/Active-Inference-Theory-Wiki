@@ -1,4 +1,4 @@
-Mathematical derivation of the [[Marginal flow lemma]] from the [[Ao Decomposition]] and the [[Markov Blanket Condition]]. 
+Mathematical derivation of the Marginal Flow Lemma from the [[Ao Decomposition]] and the [[Markov Blanket Condition]]; forming in the last formulation the formular for [[content/Sentences/Self-evidencing|Self-evidencing]].
 ***
 $$ fe(x) = \mathbb{E}_p(e|b)  [f_e(x)] = (\Gamma_{e,e}- Q_{e,e})\nabla_e \ln p^*(e) − Q_{e,b}\nabla_b p(e,b) $$
 
@@ -28,11 +28,13 @@ $$ = \underbrace{E_{p^*(e|i,s,a)}  [ -\ln p^*(i,s,a|e)]}_{\text{Inaccuracy}} + \
 ***
 ### Connections
 Derrivation on the [[Ao Decomposition]] after addition of the [[Markov Blanket Condition]]
+
+- Add Assumptions from Millidge et al. Appendix 10.3.2 
 ***
 ##### Metadata
 ***
 #Sentence
 
-#TaS 
-
 #Derivation 
+
+#ToDo

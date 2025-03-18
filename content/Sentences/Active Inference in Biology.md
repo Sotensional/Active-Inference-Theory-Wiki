@@ -1,6 +1,8 @@
-[[Self-organization|Self-organizing]] systems tend to [[Dissipation|dissipate]]. Most self-organizing systems dissipate.
+In biological systems, active inference implements self-evidencing, where action and perception work together to maintain a viable exchange with the world.
 ***
-$$ equation $$
+$$
+ȧ = f_a(s, a, μ)
+$$
 ***
 ### Evidence
 ##### Supporting
@@ -15,9 +17,11 @@ $$ equation $$
 
 ***
 ### Connections
-Following [[Second law of Thermodynamics]]
-
+[[Self-evidencing is existing]]
+[[Self-evidencing underwrites self-organisation]]
 ***
 ##### Metadata
 ***
-#Sentence
+#Sentence 
+
+#Relational

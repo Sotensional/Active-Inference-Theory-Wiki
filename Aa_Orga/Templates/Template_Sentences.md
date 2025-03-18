@@ -19,6 +19,6 @@ $$ equation $$
 ***
 ##### Metadata
 ***
-#Sentence
-#TaS
-- [ ] WiP
+#Sentence 
+
+#

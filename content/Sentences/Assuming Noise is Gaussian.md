@@ -26,6 +26,4 @@ $$
 ***
 #Sentence
 
-#TaS
-
 #Assumption

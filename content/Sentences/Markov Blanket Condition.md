@@ -24,6 +24,4 @@ Added to [[Ao Decomposition]]
 ***
 #Sentence
 
-#TaS
-
 #Hinge

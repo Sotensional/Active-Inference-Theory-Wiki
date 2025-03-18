@@ -22,6 +22,4 @@ $$ equation $$
 ***
 #Sentence
 
-#TaS
-
 #Assumption

@@ -1,6 +1,6 @@
-[[Self-organization|Self-organizing]] systems tend to [[Dissipation|dissipate]]. Most self-organizing systems dissipate.
+The free energy principle unites diverse normative theories: predictive coding, maximum efficiency, reinforcement learning, and homeostasis.
 ***
-$$ equation $$
+$$ \min F \implies \text{optimal behaviour}$$
 ***
 ### Evidence
 ##### Supporting
@@ -15,9 +15,10 @@ $$ equation $$
 
 ***
 ### Connections
-Following [[Second law of Thermodynamics]]
 
 ***
 ##### Metadata
 ***
-#Sentence
+#Sentence 
+
+#ToDo

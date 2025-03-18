@@ -22,6 +22,4 @@ $$ f^*(x) $$
 ***
 #Sentence
 
-#TaS
-
 #Assumption

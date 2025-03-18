@@ -22,5 +22,3 @@ $$ equation $$
 ##### Metadata
 ***
 #Sentence
-
-#TaS
