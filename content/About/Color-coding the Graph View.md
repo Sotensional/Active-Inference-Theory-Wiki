@@ -64,5 +64,5 @@ The color-scheme should be accessible for color blind people and is by [Paul Tol
 </tr>
 </table>
 
-The typology of sentences used here was developed in my master thesis. 
+The typology of sentences used here was developed in my master thesis. The classes Assumptions, Derivations and Relational where clamped to a class of sentences that disambiguate or relate other sentences. Interestingly I couldn't seem to find a clear short name for this class.
 

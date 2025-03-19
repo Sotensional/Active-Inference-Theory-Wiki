@@ -1,10 +1,13 @@
 Self-organizing, self-evidencing systems maintain themselves at a non-equilibrium-steady state, and thereby implicitly performing variational Bayesian inference.
 ***
 $$ \pi, o, s = \text{arg min } F(\tilde{o}, \pi|s) $$
+For Perception (Variational Free Energy):
 $$F[Q,y] = \underbrace{D_{KL}[Q(x)\|P(x)]}_{\text{Complexity}}-\underbrace{\mathbb{E}_{Q(x)[\ln P(y|x)]}}_{\text{Accuracy}}
 $$
 Can be also arranged as:
 $$ \mathcal{F}(D,\theta) = \underbrace{\mathbb{E}_{q(H|D;\theta)}[\ln p(D|H)]}_{\text{Accuracy}}+\underbrace{D_{KL}[q(H|D;\theta)\|p(H)]}_{\text{Complexity}} $$
+For Active Inference see: 
+
 ***
 ### Evidence
 ##### Supporting

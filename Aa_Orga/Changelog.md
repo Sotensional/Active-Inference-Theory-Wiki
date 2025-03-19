@@ -85,7 +85,7 @@
 - 2025-03-06T0755 · [[Free Energy Principle]]
 - 2025-03-06T0754 · [[Free Energy]]
 - 2025-03-06T0754 · [[External State]]
-- 2025-03-06T0754 · [[Expected Free Energy]]
+- 2025-03-06T0754 · [[content/Sentences/Expected Free Energy]]
 - 2025-03-06T0753 · [[Expectation]]
 - 2025-03-06T0753 · [[Evidence]]
 - 2025-03-06T0753 · [[Epistemic Value]]

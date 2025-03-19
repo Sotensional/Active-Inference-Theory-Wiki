@@ -28,7 +28,9 @@ $$ = \underbrace{E_{p^*(e|i,s,a)}  [ -\ln p^*(i,s,a|e)]}_{\text{Inaccuracy}} + \
 ***
 ### Connections
 Derrivation on the [[Ao Decomposition]] after addition of the [[Markov Blanket Condition]]
-
+Formulation of [[The Free-Energy Principle]]
+Is traceable by [[Variational Inference]]
+Can be used to derive [[Active Inference reduces Inaccuracy]]
 - Add Assumptions from Millidge et al. Appendix 10.3.2 
 ***
 ##### Metadata

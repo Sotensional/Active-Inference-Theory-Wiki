@@ -19,6 +19,7 @@ $$
 
 ***
 ### Connections
+Can be arriven at by [[Mapping of Argmax i to e]]
 [[Landauer's Principle]] via everything is read-write
 [[content/Sentences/Self-evidencing|Self-evidencing]]
 ***
